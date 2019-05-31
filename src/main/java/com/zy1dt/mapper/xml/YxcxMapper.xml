@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zy1dt.mapper.YxcxMapper">
+
+    <select id="find0" resultType="String" parameterType="String">
+        select count(yxmc) from  zyydt_view_yxtj t2 LEFT JOIN zyydt_view_yxcx t1 ON t1.yxxh = t2.yxxh AND t1.kl = t2.kl AND t1.pc = t2.pc
+        WHERE t2.kl =#{subject}  and t2.pc =#{batch}  and t2.fs =#{fraction} and t2.lqgl >0 and t2.lqgl &lt;=40
+
+
+    </select>
+
+    <select id="find1" resultType="String" parameterType="String">
+        select count(yxmc) from  zyydt_view_yxtj t2 LEFT JOIN zyydt_view_yxcx t1 ON t1.yxxh = t2.yxxh AND t1.kl = t2.kl AND t1.pc = t2.pc
+        WHERE t2.kl =#{subject}  and t2.pc =#{batch}  and t2.fs =#{fraction} and t2.lqgl >40 and t2.lqgl &lt;=70
+
+    </select>
+
+    <select id="find2" resultType="String" parameterType="String">
+        select count(yxmc) from  zyydt_view_yxtj t2 LEFT JOIN zyydt_view_yxcx t1 ON t1.yxxh = t2.yxxh AND t1.kl = t2.kl AND t1.pc = t2.pc
+        WHERE t2.kl =#{subject}  and t2.pc =#{batch}  and t2.fs =#{fraction} and t2.lqgl >70
+
+    </select>
+
+
+
+    <select id="findYx" resultType="com.zy1dt.entity.Yxcx">
+        select t2.LQGL,t1.* from  zyydt_view_yxtj t2 LEFT JOIN zyydt_view_yxcx t1 ON t1.yxxh = t2.yxxh AND t1.kl = t2.kl AND t1.pc = t2.pc
+        WHERE t2.kl =#{subject}  and t2.pc =#{batch}  and t2.fs =#{fraction}
+        <if test="type==0">
+            and t2.lqgl >=1 and t2.lqgl &lt;=40
+        </if>
+
+        <if test="type==1">
+           and t2.lqgl >40 and t2.lqgl &lt;=70
+        </if>
+
+        <if test="type==2">
+           and t2.lqgl >70
+        </if>
+
+        order by t2.lqgl limit #{pages},20
+
+    </select>
+
+    <select id="allyx" resultType="com.zy1dt.entity.Yx">
+        select t1.GBDM,t1.YXMC,t1.SF211,t1.SF985,t2.DQMC,t3.XXLBMC,t4.BXLBMC from zyydt_jbxx_yxml t1 ,zyydt_bz_xzqh t2,zyydt_bz_xxlb t3,zyydt_bz_bxlb t4
+        where t1.SZDQ=t2.DQBM and t1.XXLB=t3.XXLBXH and t1.BXLB=t4.BXLBXH ORDER BY t1.GBDM limit #{pages},20
+    </select>
+
+    <select id="findWXuser" resultType="int">
+        select count(openid) from  wx_user where openid=#{openid}
+    </select>
+
+    <insert id="insertWXuser"  parameterType="com.zy1dt.entity.wx_user" >
+        insert into wx_user(openid,total_fee,out_trade_no,transaction_id,err_code,resulet_code,end_time) value(#{openid},#{total_fee},#{out_trade_no},#{transaction_id},#{err_code},#{resulet_code},#{end_time})
+    </insert>
+
+    <select id="findYxDetailed" resultType="com.zy1dt.entity.YxDetailed">
+        select gbdm,yxmc,szdq,sf211,sf985,jxsj,ls,xsrs,bsdgs,ysrs,ssdgs,dz,dh,xxwz,zswz,nsbfb,nvsbfb,xfxx,jyqk,jj,dzyj,zszc,lqgz from  wx_zyydt_jbxx_yxml where gbdm=#{gbdm}
+    </select>
+
+    <select id="conditionAll" resultType="com.zy1dt.entity.Yx" >
+        select t1.GBDM,t1.YXMC,t1.SF211,t1.SF985,t2.DQMC,t3.XXLBMC,t4.BXLBMC from zyydt_jbxx_yxml t1 ,zyydt_bz_xzqh t2,zyydt_bz_xxlb t3,zyydt_bz_bxlb t4
+        where t1.SZDQ=t2.DQBM and t1.XXLB=t3.XXLBXH and t1.BXLB=t4.BXLBXH
+        <if test="province!=null">
+            and  substr(t1.szdq,1,2)=#{province}
+        </if>
+
+        <if test="type!='类型'">
+            and t3.xxlbmc=#{type}
+        </if>
+
+        <if test="level=='985'">
+                and t1.sf985=1
+        </if>
+
+        <if test="level=='211'">
+                and t1.sf211=1
+        </if>
+
+        <if test="level=='双一流'">
+                and t1.sf211=1 and t1.sf985=1
+        </if>
+
+        ORDER BY t1.GBDM limit #{pages},20
+
+    </select>
+
+
+    <select id="finddqbm" resultType="String">
+        select dqbm from zy1dt_common.zyydt_bz_xzqh where dqmc like #{name}"%"
+    </select>
+
+
+    <select id="ConFindYx" resultType="com.zy1dt.entity.Yxcx">
+
+
+        select t2.LQGL,t1.*  from zyydt_view_yxcx t1 ,zyydt_view_yxtj t2,zy1dt_common.zyydt_bz_xzqh t3
+        where t1.yxxh = t2.yxxh AND t1.kl = t2.kl AND t1.pc = t2.pc and t1.SZDQ=t3.DQBM and
+        t2.kl =#{subject}  and t2.pc =#{batch}  and t2.fs =#{fraction}
+        <if test="yxtype==0">
+            and t2.lqgl >=1 and t2.lqgl &lt;=40
+        </if>
+
+        <if test="yxtype==1">
+            and t2.lqgl >40 and t2.lqgl &lt;=70
+        </if>
+
+        <if test="yxtype==2">
+            and t2.lqgl >70
+        </if>
+
+        <if test="provinces!=null">
+            and  substr(t1.szdq,1,2)=#{provinces}
+        </if>
+
+        <if test="types!='类型'">
+            and t1.xxlbmc=#{types}
+        </if>
+
+        <if test="level=='985'">
+            and t1.sf985=1
+        </if>
+
+        <if test="level=='211'">
+            and t1.sf211=1
+        </if>
+
+        <if test="level=='双一流'">
+            and t1.sf211=1 and t1.sf985=1
+        </if>
+        ORDER BY t1.GBDM limit #{pages},20
+
+    </select>
+
+    <select id="findorder" resultType="com.zy1dt.entity.Order">
+        select * from wx_order
+    </select>
+
+    <select id="experience" resultType="com.zy1dt.entity.Yxcx">
+        select t2.LQGL,t1.* from  zyydt_view_yxtj t2 LEFT JOIN zyydt_view_yxcx t1 ON t1.yxxh = t2.yxxh AND t1.kl = t2.kl AND t1.pc = t2.pc
+        WHERE t2.kl =#{subject}  and t2.pc =#{batch}  and t2.fs =#{fraction}
+        and t2.lqgl >=1 and t2.lqgl &lt;=40 order by t2.lqgl limit 0,1
+
+    </select>
+
+    <select id="experience1" resultType="com.zy1dt.entity.Yxcx">
+        select t2.LQGL,t1.* from  zyydt_view_yxtj t2 LEFT JOIN zyydt_view_yxcx t1 ON t1.yxxh = t2.yxxh AND t1.kl = t2.kl AND t1.pc = t2.pc
+        WHERE t2.kl =#{subject}  and t2.pc =#{batch}  and t2.fs =#{fraction}
+        and t2.lqgl >40 and t2.lqgl &lt;=70 order by t2.lqgl limit 0,1
+
+    </select>
+
+    <select id="experience2" resultType="com.zy1dt.entity.Yxcx">
+        select t2.LQGL,t1.* from  zyydt_view_yxtj t2 LEFT JOIN zyydt_view_yxcx t1 ON t1.yxxh = t2.yxxh AND t1.kl = t2.kl AND t1.pc = t2.pc
+        WHERE t2.kl =#{subject}  and t2.pc =#{batch}  and t2.fs =#{fraction}
+        and t2.lqgl >70  order by t2.lqgl limit 0,1
+
+    </select>
+
+</mapper>

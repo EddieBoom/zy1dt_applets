@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans    
+                        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd    
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-4.0.xsd    
+                        http://www.springframework.org/schema/mvc    
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">   
+                        
+    
+    <!-- 自动扫描 -->  
+    <context:component-scan base-package="com" />
+
+    <mvc:annotation-driven></mvc:annotation-driven>
+    <!-- 引入配置文件 -->
+
+    <!--加载properties资源文件-->
+    <context:property-placeholder location="classpath:/*.properties"/>
+
+    <!--配置数据源-->
+    <bean id="dataSource1" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+        destroy-method="close">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url.hubei}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+        <property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+        <property name="autoCommitOnClose" value="${c3p0.autoCommitOnClose}"/>
+        <property name="checkoutTimeout" value="${c3p0.checkoutTimeout}"/>
+        <property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/>
+        <property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>
+        <property name="idleConnectionTestPeriod" value="${c3p0.idleConnectionTestPeriod}"/>
+        <property name="numHelperThreads" value="${c3p0.numHelperThreads}"/>
+    </bean>
+
+
+    <!--配置数据源-->
+    <bean id="dataSource2" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url.hunan}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+        <property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+        <property name="autoCommitOnClose" value="${c3p0.autoCommitOnClose}"/>
+        <property name="checkoutTimeout" value="${c3p0.checkoutTimeout}"/>
+        <property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/>
+        <property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>
+        <property name="idleConnectionTestPeriod" value="${c3p0.idleConnectionTestPeriod}"/>
+        <property name="numHelperThreads" value="${c3p0.numHelperThreads}"/>
+    </bean>
+
+    <!--配置数据源-->
+    <bean id="dataSource3" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url.henan}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+        <property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+        <property name="autoCommitOnClose" value="${c3p0.autoCommitOnClose}"/>
+        <property name="checkoutTimeout" value="${c3p0.checkoutTimeout}"/>
+        <property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/>
+        <property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>
+        <property name="idleConnectionTestPeriod" value="${c3p0.idleConnectionTestPeriod}"/>
+        <property name="numHelperThreads" value="${c3p0.numHelperThreads}"/>
+    </bean>
+
+    <!--配置数据源-->
+    <bean id="dataSource4" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url.sichuan}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+        <property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+        <property name="autoCommitOnClose" value="${c3p0.autoCommitOnClose}"/>
+        <property name="checkoutTimeout" value="${c3p0.checkoutTimeout}"/>
+        <property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/>
+        <property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>
+        <property name="idleConnectionTestPeriod" value="${c3p0.idleConnectionTestPeriod}"/>
+        <property name="numHelperThreads" value="${c3p0.numHelperThreads}"/>
+    </bean>
+
+    <!--配置数据源-->
+    <bean id="dataSource5" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url.guizhou}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+        <property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+        <property name="autoCommitOnClose" value="${c3p0.autoCommitOnClose}"/>
+        <property name="checkoutTimeout" value="${c3p0.checkoutTimeout}"/>
+        <property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/>
+        <property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>
+        <property name="idleConnectionTestPeriod" value="${c3p0.idleConnectionTestPeriod}"/>
+        <property name="numHelperThreads" value="${c3p0.numHelperThreads}"/>
+    </bean>
+
+    <!--配置数据源-->
+    <bean id="dataSource6" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url.common}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+        <property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+        <property name="autoCommitOnClose" value="${c3p0.autoCommitOnClose}"/>
+        <property name="checkoutTimeout" value="${c3p0.checkoutTimeout}"/>
+        <property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/>
+        <property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>
+        <property name="idleConnectionTestPeriod" value="${c3p0.idleConnectionTestPeriod}"/>
+        <property name="numHelperThreads" value="${c3p0.numHelperThreads}"/>
+    </bean>
+
+    <!--动态切换数据源-->
+    <bean id="dataSource" class="com.zy1dt.util.DynamicDataSource">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+                <entry key="dataSource1" value-ref="dataSource1"/>
+                <entry key="dataSource2" value-ref="dataSource2"/>
+                <entry key="dataSource3" value-ref="dataSource3"/>
+                <entry key="dataSource4" value-ref="dataSource4"/>
+                <entry key="dataSource5" value-ref="dataSource5"/>
+                <entry key="dataSource6" value-ref="dataSource6"/>
+            </map>
+        </property>
+        <!--默认数据源-->
+        <property name="defaultTargetDataSource" ref="dataSource1"/>
+    </bean>
+
+
+
+
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name="mapperLocations" value="classpath:com/zy1dt/mapper/xml/*.xml"></property>
+    </bean>
+
+    	 <!-- mapper扫描器 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	<!-- 	扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
+		<property name="basePackage" value="com.zy1dt.mapper"></property>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+  	
+  	<!--  json配置 -->
+	 <!-- 用于将对象转换为 JSON  -->  
+    <bean id="stringConverter"  
+        class="org.springframework.http.converter.StringHttpMessageConverter">  
+        <property name="supportedMediaTypes">  
+            <list>  
+                <value>text/plain;charset=UTF-8</value>  
+            </list>  
+        </property>  
+    </bean>  
+    <bean id="jsonConverter"  
+        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>  
+   
+    <bean  
+        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+        <property name="messageConverters">  
+            <list>  
+                <ref bean="stringConverter" />  
+                <ref bean="jsonConverter" />  
+            </list>  
+        </property>  
+    </bean>  
+  
+</beans> 
