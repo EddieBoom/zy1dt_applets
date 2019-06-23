@@ -1,11 +1,14 @@
 package com.zy1dt.service;
 import com.zy1dt.entity.*;
+import com.zy1dt.mapper.YxcxMapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 
 public interface YxcxService {
+
     String find0(String subject,String batch,String fraction);//查询冲刺型学校数量
     String find1(String subject,String batch,String fraction);//查询稳妥型学校数量
     String find2(String subject,String batch,String fraction);//查询保守型学校数量
